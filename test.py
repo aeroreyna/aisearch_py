@@ -1,0 +1,35 @@
+from aisearch import DE
+import matplotlib.pyplot as plt
+import benchmark as bm
+
+
+def plot_population(aisearch, solutions, fitness):
+    # print(aisearch.population, aisearch.fitness)
+    ax.scatter(solutions[0], solutions[1], alpha=0.1)
+    # plt.draw()
+    # plt.pause(0.001)
+
+
+if __name__ == '__main__':
+    popSize = 10
+    dimensions = 2
+    iterations = 1000
+    plot_it = True
+
+    aisearch = DE(bm.schwefel, dimensions)
+    aisearch.population_size = popSize
+    aisearch.max_iterations = iterations
+    if plot_it:
+        ax = bm.plot_3d(bm.schwefel, 100)
+        aisearch.at_each_evaluation = plot_population
+    aisearch.start()
+
+    solution = aisearch.best_solution.copy()
+    fitness = bm.schwefel(solution)
+    print(solution, fitness)
+
+    if plot_it:
+        fig2, ax2 = plt.subplots(2, 1)
+        ax2[0].plot(aisearch.best_fitness_hist)
+        ax2[1].plot(aisearch.iteration_time_hist)
+        plt.show()

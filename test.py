@@ -1,4 +1,4 @@
-from aisearch import PSO, DE
+from aisearch import PSO, DE, HS
 import matplotlib.pyplot as plt
 import benchmark as bm
 
@@ -11,8 +11,8 @@ def plot_population(aisearch, solutions, fitness):
 
 
 if __name__ == '__main__':
-    popSize = 1000
-    dimensions = 10
+    popSize = 10
+    dimensions = 2
     iterations = 1000
     plot_it = False
 

@@ -56,7 +56,10 @@ class metaheuristic:
 
     def init_population(self):
         "Set population to random solutions"
-        self.population = np.random.rand(self.population_size, self.dimensions)
+        self.population = self.rand_population()
+
+    def rand_population(self):
+        return np.random.rand(self.population_size, self.dimensions)
 
     def eval_population(self, solutions=None):
         "Evualuate the solutions on the fitness function"
@@ -97,6 +100,16 @@ class metaheuristic:
 
     def sort_population(self):
         "Sort the population fitness wise"
+        sorted_argument = np.argsort(self.fitness)
+        self.fitness = self.fitness[sorted_argument]
+        self.population = self.population[sorted_argument]
+
+    def keep_the_best(self, trial_population, trial_fitnesses):
+        self.population = np.vstack((self.population, trial_population))
+        self.fitness = np.hstack((self.fitness, trial_fitnesses))
+        self.sort_population()
+        self.population = self.population[:self.population_size]
+        self.fitness = self.fitness[:self.population_size]
 
     def get_shuffled_population(self):
         randIndexing = np.random.permutation(self.population_size)

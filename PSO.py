@@ -25,10 +25,10 @@ class PSO(metaheuristic):
             self.best_personal = self.population.copy()
             self.best_personal_fitness = self.fitness.copy()
         # atraction to the best personal solution
-        pb_atraction = np.random.rand(self.population_size, self.dimensions)
+        pb_atraction = self.rand_population()
         pb_atraction *= (self.best_personal - self.population)
         # atraction to the best global solution
-        best_atraction = np.random.rand(self.population_size, self.dimensions)
+        best_atraction = self.rand_population()
         best_atraction *= (self.best_solution - self.population)
         # update velocity trayectories.
         self.velocity *= velocity_p

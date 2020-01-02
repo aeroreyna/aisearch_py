@@ -21,10 +21,10 @@ class DE(metaheuristic):
         vector3 = self.get_shuffled_population()
         vector4 = self.get_shuffled_population()
         vector5 = self.get_shuffled_population()
-        trial_population = self.population * 1
+        trial_population = self.population.copy()
         doners = vector1 + differential_weight * (vector2 - vector3) + differential_weight * (vector4 - vector5)
-        crossoverProbs = np.random.rand(self.population_size, self.dimensions)
-        trial_population[crossoverProbs < crossover_rate] = doners[crossoverProbs < crossover_rate]
+        crossoverProbs = self.rand_population() < crossover_rate
+        trial_population[crossoverProbs] = doners[crossoverProbs]
         trial_population = self.check_bounds_toroidal(trial_population)
         trial_fitnesses = self.eval_population(trial_population)
         self.accept_improvements(trial_population, trial_fitnesses)

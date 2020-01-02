@@ -1,5 +1,4 @@
 from metaheuristic import metaheuristic
-import numpy as np
 
 
 class PSO(metaheuristic):
@@ -11,9 +10,9 @@ class PSO(metaheuristic):
             "best": 2
         }
         self.algorithm_name = "PSO"
-        self.velocity = np.array([])
-        self.best_personal = np.array([])
-        self.best_personal_fitness = np.array([])
+        self.velocity = self.empty_array()
+        self.best_personal = self.empty_array()
+        self.best_personal_fitness = self.empty_array()
         metaheuristic.__init__(self, fitness_function, dimensions)
 
     def operators(self):
@@ -21,7 +20,7 @@ class PSO(metaheuristic):
         best_personal_p = self.parameters["best_personal"]
         best_p = self.parameters["best"]
         if self.velocity.shape[0] == 0 or self.best_personal.shape[0] == 0:
-            self.velocity = np.zeros([self.population_size, self.dimensions])
+            self.velocity = self.zeros_population()
             self.best_personal = self.population.copy()
             self.best_personal_fitness = self.fitness.copy()
         # atraction to the best personal solution

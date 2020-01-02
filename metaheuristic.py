@@ -1,6 +1,7 @@
 import numpy as np
 import time
 
+
 class metaheuristic:
     """
     aisearch class
@@ -61,6 +62,9 @@ class metaheuristic:
     def rand_population(self):
         return np.random.rand(self.population_size, self.dimensions)
 
+    def zeros_population(self):
+        return np.zeros([self.population_size, self.dimensions])
+
     def eval_population(self, solutions=None):
         "Evualuate the solutions on the fitness function"
         local = True
@@ -119,3 +123,9 @@ class metaheuristic:
         improved = self.fitness > trial_fitnesses
         self.population[improved] = trial_population[improved]
         self.fitness[improved] = trial_fitnesses[improved]
+
+    def empty_array(self):
+        return np.array([])
+
+    def rand(self, *args):
+        return np.random.rand(*args)

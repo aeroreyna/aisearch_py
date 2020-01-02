@@ -1,4 +1,4 @@
-from aisearch import PSO, DE, HS
+from aisearch import PSO, DE, HS, WOA
 import matplotlib.pyplot as plt
 import benchmark as bm
 
@@ -13,10 +13,10 @@ def plot_population(aisearch, solutions, fitness):
 if __name__ == '__main__':
     popSize = 10
     dimensions = 2
-    iterations = 1000
+    iterations = 100
     plot_it = False
 
-    aisearch = PSO(bm.schwefel, dimensions)
+    aisearch = WOA(bm.schwefel, dimensions)
     aisearch.population_size = popSize
     aisearch.max_iterations = iterations
     if plot_it:

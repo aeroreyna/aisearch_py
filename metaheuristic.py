@@ -92,8 +92,7 @@ class metaheuristic:
     def check_bounds_toroidal(self, solutions=None):
         if solutions is None:
             solutions = self.population
-        solutions[solutions > 1] -= 1
-        solutions[solutions < 0] += 1
+        solutions -= np.floor(solutions)
         return solutions
 
     def sort_population(self):

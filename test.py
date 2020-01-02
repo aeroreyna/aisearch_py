@@ -1,22 +1,22 @@
-from aisearch import DE
+from aisearch import PSO, DE
 import matplotlib.pyplot as plt
 import benchmark as bm
 
 
 def plot_population(aisearch, solutions, fitness):
-    # print(aisearch.population, aisearch.fitness)
-    ax.scatter(solutions[0], solutions[1], alpha=0.1)
-    # plt.draw()
-    # plt.pause(0.001)
+    # print(solutions.shape, solutions[:, 1])
+    ax.scatter(solutions[:, 0], solutions[:, 1], alpha=0.2)
+    plt.draw()
+    plt.pause(0.01)
 
 
 if __name__ == '__main__':
-    popSize = 10
-    dimensions = 2
+    popSize = 1000
+    dimensions = 10
     iterations = 1000
-    plot_it = True
+    plot_it = False
 
-    aisearch = DE(bm.schwefel, dimensions)
+    aisearch = PSO(bm.schwefel, dimensions)
     aisearch.population_size = popSize
     aisearch.max_iterations = iterations
     if plot_it:
